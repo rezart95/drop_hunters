@@ -1,3 +1,4 @@
+import os
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
@@ -26,6 +27,8 @@ if response.status_code == 200:
             product_images.append(source_tag['srcset'].split(', ')[0].split(' ')[0])
     product_stock = [stock.text.strip() for stock in soup.find_all('div', class_='product-tile__stock')]
 
+    print("PRODUCT STOCK", product_stock) # not all the products have stock information
+
 
     # Extract every second URL (starting from the second one)
     product_only_image_urls = product_images[::2]
@@ -47,8 +50,22 @@ else:
 
 
 
-# def download_image(image_url, filename):
-#     response = requests.get(image_url)
-#     if response.status_code == 200:
-#         with open(filename, 'wb') as file:
-#             file.write(response.content)
+# Folder where images will be saved
+folder_name = 'downloaded_images'
+os.makedirs(folder_name, exist_ok=True)
+
+# Loop through the image URLs
+for i, url in enumerate(product_only_image_urls):
+    try:
+        # Fetch the image
+        response = requests.get(url)
+        response.raise_for_status()  # Raise an error for bad responses
+
+        # Construct a file path where the image will be saved
+        file_path = os.path.join(folder_name, f'image_{i}.jpg')
+
+        # Write the image to a file
+        with open(file_path, 'wb') as file:
+            file.write(response.content)
+    except requests.RequestException as e:
+        print(f"Error downloading {url}: {e}")
