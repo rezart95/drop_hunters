@@ -2,6 +2,7 @@ import os
 import requests
 from bs4 import BeautifulSoup
 import pandas as pd
+import hashlib
 
 # The URL from which you want to scrape the data
 category = 'basket-bags'
@@ -31,7 +32,6 @@ if response.status_code == 200:
 
     print("PRODUCT STOCK", product_stock) # not all the products have stock information
 
-
     # Extract every second URL (starting from the second one)
     product_only_image_urls = product_images[::2]
 
@@ -46,7 +46,6 @@ if response.status_code == 200:
 
     # Print the DataFrame
     pd.set_option('display.max_colwidth', None)
-    print(df)
 else:
     print(f"Failed to retrieve the web page. Status code: {response.status_code}")
 
@@ -63,8 +62,12 @@ for i, url in enumerate(product_only_image_urls):
         response = requests.get(url)
         response.raise_for_status()  # Raise an error for bad responses
 
+        # Extract the name from the URL
+        url_parts = url.split('/')
+        image_name = url_parts[-1].split('?')[0]  # Get the last part of the URL and remove query parameters
+
         # Construct a file path where the image will be saved
-        file_path = os.path.join(folder_name, f'image_{i}.jpg')
+        file_path = os.path.join(folder_name, image_name)
 
         # Write the image to a file
         with open(file_path, 'wb') as file:
