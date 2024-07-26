@@ -4,7 +4,9 @@ from bs4 import BeautifulSoup
 import pandas as pd
 
 # The URL from which you want to scrape the data
-URL = 'https://chylak.com/pl/pl/products/basket-bags'
+category = 'basket-bags'
+URL = f'https://chylak.com/pl/pl/products/{category}'
+
 # Headers to simulate a request coming from a browser
 headers = {"User-Agent": "Mozilla/5.0"}
 
