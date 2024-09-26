@@ -3,7 +3,7 @@ import dash_bootstrap_components as dbc
 import layout
 
 
-app = Dash(__name__, external_stylesheets=[dbc.themes.QUARTZ])
+app = Dash(__name__, external_stylesheets=[dbc.themes.BOOTSTRAP])
 
 app.layout = layout.layout
 

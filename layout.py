@@ -1,115 +1,154 @@
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
+# Sample brand options; replace with dynamic data as needed
+brand_options = [
+    {"label": "Brand A", "value": "brand_a"},
+    {"label": "Brand B", "value": "brand_b"},
+    {"label": "Brand C", "value": "brand_c"},
+]
+
+# Sample size options; replace with dynamic data as needed
+size_options = [
+    {"label": "Small", "value": "S"},
+    {"label": "Medium", "value": "M"},
+    {"label": "Large", "value": "L"},
+    {"label": "Extra Large", "value": "XL"},
+]
 
 layout = dbc.Container(
     [
-        html.Div(
+        dbc.Row(
             [
-                html.Div(
+                # Side Panel
+                dbc.Col(
                     [
-                        html.H1
-                        ([
-                            html.Span("Welcome"),
-                            html.Br(),
-                            html.Span("to DropHunters"),
-                        ]),
-                        html.P("Get all the latest drops and releases from your favorite brands."),
-                ],
-                style={"vertical-alignment": "top", "height": 260,}
-                ), 
-                html.Div(
-                    [
-                        html.Div(style={'width': 206}),
-                        html.Div(style={'width': 104})
-                    ],
-                    style={'margin-left': 15, 'margin-right': 15, 'display': 'flex'}
-                ),
-                html.Div(
-                    [
-                        html.Div(dbc.RadioItems(
-                            className='btn-group',
-                            inputClassName='btn-check',
-                            labelClassName="btn btn-outline-light",
-                            labelCheckedClassName="btn btn-light",
-                            options=[
-                                {"label": "Graph", "value": 1}, 
-                                {"label": "Table", "value": 2}
-                            ],
-                            value=1
+                        html.H2("Brands", className="sidebar-title"),
+                        dcc.Dropdown(
+                            id="brand-dropdown",
+                            options=brand_options,
+                            multi=True,
+                            placeholder="Select brands",
+                            className="sidebar-dropdown",
                         ),
-                                style={'width': 206}),
-                        html.Div(dbc.Button(
-                            "About",
-                            className="btn btn-info",
-                            n_clicks=0
-                        ), 
-                                style={'width': 104})
                     ],
-                    style={
-                        'margin-left': 15,
-                        'margin-right': 15,
-                        'display': 'flex'
-                    }
+                    width=3,
+                    className="sidebar",
                 ),
-                html.Div([
-                    html.Div([
-                        html.H2('Unclearable Dropdown:'),
-                        dcc.Dropdown(
-                            options=[
-                                {'label': 'Option A', 'value': 1}, 
-                                {'label': 'Option B', 'value': 2}, 
-                                {'label': 'Option C', 'value': 3}
+                # Main Content
+                dbc.Col(
+                    [
+                        dbc.Tabs(
+                            [
+                                dbc.Tab(
+                                    label="Existing Products",
+                                    children=[
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Product Link"),
+                                                dbc.Input(
+                                                    type="url",
+                                                    id="product-link",
+                                                    placeholder="Enter product URL",
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Category"),
+                                                dbc.RadioItems(
+                                                    id="category-radio",
+                                                    options=[
+                                                        {"label": "Clothes", "value": "clothes"},
+                                                        {"label": "Shoes", "value": "shoes"},
+                                                        {"label": "Accessories", "value": "accessories"},
+                                                    ],
+                                                    value="clothes",
+                                                    inline=True,
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Size"),
+                                                dcc.Dropdown(
+                                                    id="size-dropdown",
+                                                    options=size_options,
+                                                    placeholder="Select size",
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                    ],
+                                    tab_id="existing-products",
+                                ),
+                                dbc.Tab(
+                                    label="New Releases",
+                                    children=[
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Upload Product Image"),
+                                                dcc.Upload(
+                                                    id="product-upload",
+                                                    children=html.Div(
+                                                        [
+                                                            "Drag and Drop or ",
+                                                            html.A("Select Files"),
+                                                        ]
+                                                    ),
+                                                    style={
+                                                        "width": "100%",
+                                                        "height": "60px",
+                                                        "lineHeight": "60px",
+                                                        "borderWidth": "1px",
+                                                        "borderStyle": "dashed",
+                                                        "borderRadius": "5px",
+                                                        "textAlign": "center",
+                                                        "margin-bottom": "15px",
+                                                    },
+                                                    multiple=False,
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Product Description"),
+                                                dbc.Textarea(
+                                                    id="product-description",
+                                                    placeholder="Describe the product...",
+                                                    style={"height": "100px"},
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                        dbc.CardGroup(
+                                            [
+                                                dbc.Label("Available Date"),
+                                                dcc.DatePickerSingle(
+                                                    id="available-date",
+                                                    date=None,
+                                                    display_format="DD/MM/YYYY",
+                                                ),
+                                            ],
+                                            className="mb-3",
+                                        ),
+                                    ],
+                                    tab_id="new-releases",
+                                ),
                             ],
-                            value=1,
-                            clearable=False,
-                            optionHeight=40
-                        )
-                    ]),
-                    html.Div([
-                        html.H2('Unclearable Dropdown:'),
-                        dcc.Dropdown(
-                            options=[
-                                {'label': 'Option A', 'value': 1}, 
-                                {'label': 'Option B', 'value': 2}, 
-                                {'label': 'Option C', 'value': 3}
-                            ],
-                            value=2,
-                            clearable=False,
-                            optionHeight=40
-                        )
-                    ]),
-                    html.Div([
-                        html.H2('Clearable Dropdown:'),
-                        dcc.Dropdown(
-                            options=[
-                                {'label': 'Option A', 'value': 1}, 
-                                {'label': 'Option B', 'value': 2}, 
-                                {'label': 'Option C', 'value': 3}
-                            ],
-                            clearable=True,
-                            optionHeight=40
-                        )
-                    ]),
-                ],
-                style={'margin-left': 15, 'margin-right': 15, 'margin-top': 30}),
+                            id="tabs",
+                            active_tab="existing-products",
+                        ),
+                    ],
+                    width=9,
+                ),
             ],
-            style={'width': 340, 'margin-left': 35, 'margin-top': 35, 'margin-bottom': 35}
-        ),
-        html.Div(
-            [
-                html.Div(style={'width': 790}),
-                html.Div(style={'width': 200})
-            ],
-            style={
-                'width': 990,
-                'margin-top': 35,
-                'margin-right': 35,
-                'margin-bottom': 35,
-                'display': 'flex'
-                }
+            className="main-row",
         )
     ],
     fluid=True,
-    style={'display': 'flex'},
-    className='dashboard-container')
+    className="dashboard-container",
+)
