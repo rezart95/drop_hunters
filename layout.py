@@ -39,23 +39,6 @@ navbar = dbc.Navbar(
     fixed="top",
 )
 
-sidebar = dbc.Card(
-    [
-        dbc.CardHeader(html.H4("Brands")),
-        dbc.CardBody(
-            dcc.Dropdown(
-                id="brand-dropdown",
-                options=brand_options,
-                multi=True,
-                placeholder="Select brands",
-            )
-        ),
-    ],
-    className="mb-3",
-)
-
-
-
 
 layout = dbc.Container(
     [
@@ -65,11 +48,8 @@ layout = dbc.Container(
                 # Side Panel
                 dbc.Col(
                     [
-                        html.Pre(),
-                        html.Pre(),
-                        html.Pre(),
-                        html.Pre(),
-                        html.H2("Brands", className="sidebar-title"),
+                        html.Div(style={"marginTop": "60px"}),
+                        html.H2("Select Brands", style={"fontSize": "1.5rem"}, className="sidebar-title"),
                         dcc.Dropdown(
                             id="brand-dropdown",
                             options=brand_options,
@@ -85,6 +65,7 @@ layout = dbc.Container(
                 # Main Content
                 dbc.Col(
                     [
+                        html.Div(style={"marginTop": "60px"}),  # Adds space below the navbar
                         dbc.Tabs(
                             [
                                 dbc.Tab(
@@ -93,7 +74,7 @@ layout = dbc.Container(
                                         html.Pre(),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Product Link"),
+                                                dbc.Label("Product Link", style={"fontSize": "1.25rem"}),  # Increased font size
                                                 dbc.Input(
                                                     type="url",
                                                     id="product-link",
@@ -104,20 +85,23 @@ layout = dbc.Container(
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Categories"),
-                                                html.Pre(),
                                                 html.Div(
-                                                    dbc.RadioItems(
-                                                        id="category-radio",
-                                                        options=[
-                                                            {"label": "Clothes", "value": "clothes"},
-                                                            {"label": "Shoes", "value": "shoes"},
-                                                            {"label": "Accessories", "value": "accessories"},
-                                                        ],
-                                                        value="clothes",
-                                                        inline=True,
-                                                    ),
-                                                    style={"marginTop": "1rem"},  # Adds space between label and options
+                                                    [
+                                                        dbc.Label("Categories", style={"fontSize": "1.25rem"}),
+                                                        html.Div(
+                                                            dbc.RadioItems(
+                                                                id="category-radio",
+                                                                options=[
+                                                                    {"label": "Clothes", "value": "clothes"},
+                                                                    {"label": "Shoes", "value": "shoes"},
+                                                                    {"label": "Accessories", "value": "accessories"},
+                                                                ],
+                                                                value="clothes",
+                                                                inline=True,
+                                                            ),
+                                                            style={"marginTop": "1rem"},  # Adds space between label and options
+                                                        ),
+                                                    ]
                                                 ),
                                             ],
                                             className="mb-3",
