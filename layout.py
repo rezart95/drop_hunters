@@ -1,3 +1,4 @@
+import dash
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 
@@ -16,13 +17,58 @@ size_options = [
     {"label": "Extra Large", "value": "XL"},
 ]
 
+PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
+
+navbar = dbc.Navbar(
+    [
+        dbc.Container(
+            [
+                dbc.Row(
+                    [
+                        dbc.Col(
+                            dbc.NavbarBrand("Drop Hunters", className="ms-2", style={"fontSize": "1.5rem"}),
+                        ), 
+                    ],
+                    align="center",
+                )
+            ],
+            fluid=True,
+        )
+    ],
+    color="azure",
+    fixed="top",
+)
+
+sidebar = dbc.Card(
+    [
+        dbc.CardHeader(html.H4("Brands")),
+        dbc.CardBody(
+            dcc.Dropdown(
+                id="brand-dropdown",
+                options=brand_options,
+                multi=True,
+                placeholder="Select brands",
+            )
+        ),
+    ],
+    className="mb-3",
+)
+
+
+
+
 layout = dbc.Container(
     [
+        navbar,
         dbc.Row(
             [
                 # Side Panel
                 dbc.Col(
                     [
+                        html.Pre(),
+                        html.Pre(),
+                        html.Pre(),
+                        html.Pre(),
                         html.H2("Brands", className="sidebar-title"),
                         dcc.Dropdown(
                             id="brand-dropdown",
@@ -34,6 +80,7 @@ layout = dbc.Container(
                     ],
                     width=3,
                     className="sidebar",
+                    style={"borderRight": "5px solid #DCDCDC"},  # Added border to separate from main content
                 ),
                 # Main Content
                 dbc.Col(
@@ -43,6 +90,7 @@ layout = dbc.Container(
                                 dbc.Tab(
                                     label="Existing Products",
                                     children=[
+                                        html.Pre(),
                                         dbc.CardGroup(
                                             [
                                                 dbc.Label("Product Link"),
@@ -56,28 +104,34 @@ layout = dbc.Container(
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Category"),
-                                                dbc.RadioItems(
-                                                    id="category-radio",
-                                                    options=[
-                                                        {"label": "Clothes", "value": "clothes"},
-                                                        {"label": "Shoes", "value": "shoes"},
-                                                        {"label": "Accessories", "value": "accessories"},
-                                                    ],
-                                                    value="clothes",
-                                                    inline=True,
+                                                dbc.Label("Categories"),
+                                                html.Pre(),
+                                                html.Div(
+                                                    dbc.RadioItems(
+                                                        id="category-radio",
+                                                        options=[
+                                                            {"label": "Clothes", "value": "clothes"},
+                                                            {"label": "Shoes", "value": "shoes"},
+                                                            {"label": "Accessories", "value": "accessories"},
+                                                        ],
+                                                        value="clothes",
+                                                        inline=True,
+                                                    ),
+                                                    style={"marginTop": "1rem"},  # Adds space between label and options
                                                 ),
                                             ],
                                             className="mb-3",
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Size"),
+                                                dbc.Label("Select the size of the product"),
                                                 dcc.Dropdown(
                                                     id="size-dropdown",
                                                     options=size_options,
                                                     placeholder="Select size",
+                                                    className="sidebar-dropdown",
                                                 ),
+                                                html.Pre(),
                                             ],
                                             className="mb-3",
                                         ),
@@ -133,7 +187,7 @@ layout = dbc.Container(
                                                     display_format="DD/MM/YYYY",
                                                 ),
                                             ],
-                                            className="mb-3",
+                                            className="date-picker-group",
                                         ),
                                     ],
                                     tab_id="new-releases",
