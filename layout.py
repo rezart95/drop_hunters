@@ -1,6 +1,8 @@
 import dash
 from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
+import dash_mantine_components as dmc
+
 
 # Sample brand options; replace with dynamic data as needed
 brand_options = [
@@ -177,24 +179,32 @@ layout = dbc.Container(
                                             [
                                                 dbc.Label("Upload Product Image"),
                                                 dcc.Upload(
-                                                    id="product-upload",
-                                                    children=html.Div(
-                                                        [
-                                                            "Drag and Drop or ",
-                                                            html.A("Select Files"),
-                                                        ]
-                                                    ),
-                                                    style={
-                                                        "width": "100%",
-                                                        "height": "60px",
-                                                        "lineHeight": "60px",
-                                                        "borderWidth": "1px",
-                                                        "borderStyle": "dashed",
-                                                        "borderRadius": "5px",
-                                                        "textAlign": "center",
-                                                        "margin-bottom": "15px",
-                                                    },
+                                                    id="upload-data",
+                                                    children=html.Div(["Drag and Drop or Select File"]),
                                                     multiple=False,
+                                                    accept=".xlsx,.csv"
+                                                ),
+                                                dbc.Tooltip(
+                                                    "Supported file format: .jpg or .png",
+                                                    target="upload-data",
+                                                    style={"margin-left": "5px"},
+                                                    autohide=False
+                                                ),
+                                                dcc.Loading(
+                                                    id="data-loading-viz-pre",
+                                                    type="default",
+                                                    children=html.Div(id="filecache_marker", style={"display": "none"}),
+                                                ),
+                                                # html.Div(
+                                                #     id="uploaded-file-name-div",
+                                                #     children=[],
+                                                #     style={"display": "none"},
+                                                # ),
+                                                dbc.Alert(
+                                                    "File size exceeds 5MB limit, please upload a smaller file",
+                                                    id="file-size-error",
+                                                    color="danger",
+                                                    style={"display": "none"}
                                                 ),
                                             ],
                                             className="mb-3",
