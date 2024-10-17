@@ -53,9 +53,9 @@ layout = dbc.Container(
                 dbc.Col(
                     [
                         html.Div(style={"marginTop": "60px"}),
-                        html.H4(
+                        html.H5(
                             "Select Brands", 
-                            style={"fontSize": "1.25rem"}, 
+                            # style={"fontSize": "1.25rem"}, 
                             className="sidebar-title"
                         ),
                         dcc.Dropdown(
@@ -69,9 +69,9 @@ layout = dbc.Container(
                             [
                                 html.Div(
                                     style={"marginTop": "80px"}),
-                                html.H4(
+                                html.H5(
                                     "Choose Payment Method", 
-                                    style={"fontSize": "1.25rem"}, 
+                                    # style={"fontSize": "1.25rem"}, 
                                     className="sidebar-title"
                                 ),
                                 dbc.RadioItems(
@@ -102,9 +102,9 @@ layout = dbc.Container(
                                     label="Existing Products",
                                     children=[
                                         html.Pre(),
-                                        html.H4(
+                                        html.H5(
                                             "Product Link", 
-                                            style={"fontSize": "1.25rem"},
+                                            # style={"fontSize": "1.25rem"},
                                             className="sidebar-title"
                                         ),
                                         html.Div(
@@ -128,9 +128,9 @@ layout = dbc.Container(
                                                 html.Div(
                                                     [
                                                         html.Div(style={"marginTop": "30px"}),
-                                                        html.H4(
+                                                        html.H5(
                                                             "Select Category", 
-                                                            style={"fontSize": "1.25rem"}, 
+                                                            # style={"fontSize": "1.25rem"}, 
                                                             className="sidebar-title"
                                                         ),
                                                         dbc.RadioItems(
@@ -151,9 +151,9 @@ layout = dbc.Container(
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                html.H4(
+                                                html.H5(
                                                     "Select Product Size", 
-                                                    style={"fontSize": "1.25rem"}, 
+                                                    # style={"fontSize": "1.25rem"}, 
                                                     className="sidebar-title"
                                                 ),
                                             ],
@@ -177,7 +177,7 @@ layout = dbc.Container(
                                     children=[
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Upload Product Image"),
+                                                html.H5("Upload Product Image"),
                                                 dcc.Upload(
                                                     id="upload-data",
                                                     children=html.Div(["Drag and Drop or Select File"]),
@@ -211,7 +211,7 @@ layout = dbc.Container(
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Product Description"),
+                                                html.H5("Product Description"),
                                                 dbc.Textarea(
                                                     id="product-description",
                                                     placeholder="Describe the product...",
@@ -220,13 +220,21 @@ layout = dbc.Container(
                                             ],
                                             className="mb-3",
                                         ),
-                                        dbc.CardGroup(
+                                        html.Div(
                                             [
-                                                dbc.Label("Available Date"),
-                                                dcc.DatePickerSingle(
-                                                    id="available-date",
-                                                    date=None,
-                                                    display_format="DD/MM/YYYY",
+                                                html.H5("Select Date and Time"),
+                                                html.Div(
+                                                    style={"display": "flex", "alignItems": "center"},
+                                                    children=[
+                                                        dcc.DatePickerSingle(
+                                                            id="available-date",
+                                                            date=None,
+                                                            display_format="DD/MM/YYYY",
+                                                            className="SingleDatePickerInput__withBorder"
+                                                        ),
+                                                        html.Div(style={"width": "10px"}),  # Spacer
+                                                        dmc.TimeInput(w=100),
+                                                    ]
                                                 ),
                                             ],
                                             className="date-picker-group",
