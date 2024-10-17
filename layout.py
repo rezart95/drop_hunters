@@ -17,8 +17,6 @@ size_options = [
     {"label": "Extra Large", "value": "XL"},
 ]
 
-PLOTLY_LOGO = "https://images.plot.ly/logo/new-branding/plotly-logomark.png"
-
 navbar = dbc.Navbar(
     [
         dbc.Container(
@@ -26,7 +24,11 @@ navbar = dbc.Navbar(
                 dbc.Row(
                     [
                         dbc.Col(
-                            dbc.NavbarBrand("Drop Hunters", className="ms-2", style={"fontSize": "1.5rem"}),
+                            dbc.NavbarBrand(
+                                "Drop Hunters", 
+                                className="ms-2",
+                                style={"fontSize": "1.5rem"}
+                            ),
                         ), 
                     ],
                     align="center",
@@ -49,13 +51,39 @@ layout = dbc.Container(
                 dbc.Col(
                     [
                         html.Div(style={"marginTop": "60px"}),
-                        html.H2("Select Brands", style={"fontSize": "1.5rem"}, className="sidebar-title"),
+                        html.H4(
+                            "Select Brands", 
+                            style={"fontSize": "1.25rem"}, 
+                            className="sidebar-title"
+                        ),
                         dcc.Dropdown(
                             id="brand-dropdown",
                             options=brand_options,
                             multi=True,
                             placeholder="Select brands",
                             className="sidebar-dropdown",
+                        ),
+                        html.Div(
+                            [
+                                html.Div(
+                                    style={"marginTop": "80px"}),
+                                html.H4(
+                                    "Choose Payment Method", 
+                                    style={"fontSize": "1.25rem"}, 
+                                    className="sidebar-title"
+                                ),
+                                dbc.RadioItems(
+                                    id="payment-method",
+                                    options=[
+                                        {"label": "Google Pay", "value": "google_pay"},
+                                        {"label": "Apple Pay", "value": "apple_pay"},
+                                        {"label": "Paypal", "value": "paypal"},
+                                    ],
+                                    value="google_pay",
+                                    inline=False,
+                                ),
+                            ],
+                            style={"textAlign": "left"}
                         ),
                     ],
                     width=3,
@@ -72,52 +100,72 @@ layout = dbc.Container(
                                     label="Existing Products",
                                     children=[
                                         html.Pre(),
-                                        dbc.CardGroup(
-                                            [
-                                                dbc.Label("Product Link", style={"fontSize": "1.25rem"}),  # Increased font size
-                                                dbc.Input(
-                                                    type="url",
-                                                    id="product-link",
-                                                    placeholder="Enter product URL",
+                                        html.H4(
+                                            "Product Link", 
+                                            style={"fontSize": "1.25rem"},
+                                            className="sidebar-title"
+                                        ),
+                                        html.Div(
+                                            children=[
+                                                dcc.Input(
+                                                    id="group-store-input",
+                                                    placeholder="Enter URL",
+                                                    style={"margin-right": "10px", "width": "80%"},
                                                 ),
-                                            ],
-                                            className="mb-3",
+                                                html.Button(
+                                                    id="select-product-button",
+                                                    n_clicks=0,
+                                                    children="Select Product",
+                                                    className="regular-button",
+                                                    style={'margin-left': '1%', 'display': 'inline-block', "width": "15%"},
+                                                ),
+                                            ]
                                         ),
                                         dbc.CardGroup(
                                             [
                                                 html.Div(
                                                     [
-                                                        dbc.Label("Categories", style={"fontSize": "1.25rem"}),
-                                                        html.Div(
-                                                            dbc.RadioItems(
-                                                                id="category-radio",
-                                                                options=[
-                                                                    {"label": "Clothes", "value": "clothes"},
-                                                                    {"label": "Shoes", "value": "shoes"},
-                                                                    {"label": "Accessories", "value": "accessories"},
-                                                                ],
-                                                                value="clothes",
-                                                                inline=True,
-                                                            ),
-                                                            style={"marginTop": "1rem"},  # Adds space between label and options
+                                                        html.Div(style={"marginTop": "30px"}),
+                                                        html.H4(
+                                                            "Select Category", 
+                                                            style={"fontSize": "1.25rem"}, 
+                                                            className="sidebar-title"
                                                         ),
-                                                    ]
+                                                        dbc.RadioItems(
+                                                            id="category-radio",
+                                                            options=[
+                                                                {"label": "Clothes", "value": "clothes"},
+                                                                {"label": "Shoes", "value": "shoes"},
+                                                                {"label": "Accessories", "value": "accessories"},
+                                                            ],
+                                                            value="clothes",
+                                                            inline=True,
+                                                        ),
+                                                    ],
+                                                    style={"textAlign": "left"}
                                                 ),
                                             ],
                                             className="mb-3",
                                         ),
                                         dbc.CardGroup(
                                             [
-                                                dbc.Label("Select the size of the product"),
-                                                dcc.Dropdown(
-                                                    id="size-dropdown",
-                                                    options=size_options,
-                                                    placeholder="Select size",
-                                                    className="sidebar-dropdown",
+                                                html.H4(
+                                                    "Select Product Size", 
+                                                    style={"fontSize": "1.25rem"}, 
+                                                    className="sidebar-title"
                                                 ),
-                                                html.Pre(),
                                             ],
                                             className="mb-3",
+                                        ),
+                                        html.Div(
+                                            dcc.Dropdown(
+                                                id="size-dropdown",
+                                                options=size_options,
+                                                placeholder="Select size",
+                                                className="sidebar-dropdown",
+                                                style={"width": "90%"}  # Regulating the width
+                                            ),
+                                            style={"textAlign": "left"}
                                         ),
                                     ],
                                     tab_id="existing-products",
