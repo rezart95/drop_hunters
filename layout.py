@@ -123,6 +123,37 @@ layout = dbc.Container(
                                                 ),
                                             ]
                                         ),
+                                        html.Div(
+                                            id="table-visualization",
+                                            style={"margin-top": "20px", "border": "1px solid #ccc", "padding": "10px"},
+                                            children="Table will be displayed here."
+                                        ),
+                                        # Add new input for LLM request
+                                        html.Div(
+                                            [
+                                                html.H5("LLM Request"),
+                                                dcc.Input(
+                                                    id="llm-request-input",
+                                                    type="text",
+                                                    placeholder="Enter your request here",
+                                                    style={"width": "80%", "marginRight": "10px"}
+                                                ),
+                                                html.Button(
+                                                    "Submit",
+                                                    id="llm-request-button",
+                                                    n_clicks=0,
+                                                    className="regular-button",
+                                                    style={"width": "15%"}
+                                                ),
+                                            ],
+                                            style={"margin-top": "20px"}
+                                        ),
+                                        # Div to display LLM response
+                                        html.Div(
+                                            id="llm-response",
+                                            style={"margin-top": "20px", "border": "1px solid #ccc", "padding": "10px"},
+                                            children="LLM response will be displayed here."
+                                        ),
                                         dbc.CardGroup(
                                             [
                                                 html.Div(
