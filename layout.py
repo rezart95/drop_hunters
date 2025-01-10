@@ -130,18 +130,11 @@ layout = dbc.Container(
                                         html.Div(
                                             [
                                                 html.H5("LLM Request"),
-                                                dcc.Textarea(
+                                                dcc.Input(
                                                     id="llm-request-input",
+                                                    type="text",
                                                     placeholder="Enter your request here",
-                                                    style={
-                                                        "width": "80%",
-                                                        "marginRight": "10px",
-                                                        "height": "50px",
-                                                        "resize": "vertical",
-                                                        "minHeight": "50px",
-                                                        "maxHeight": "300px",
-                                                        "overflow": "auto",
-                                                    },
+                                                    style={"width": "80%", "marginRight": "10px"}
                                                 ),
                                                 html.Button(
                                                     "Parse Content",
