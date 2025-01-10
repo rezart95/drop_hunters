@@ -3,7 +3,6 @@ from dash import Dash, html, dcc
 import dash_bootstrap_components as dbc
 import dash_mantine_components as dmc
 
-
 # Sample brand options; replace with dynamic data as needed
 brand_options = [
     {"label": "Brand A", "value": "brand_a"},
@@ -42,7 +41,6 @@ navbar = dbc.Navbar(
     color="azure",
     fixed="top",
 )
-
 
 layout = dbc.Container(
     [
@@ -132,18 +130,25 @@ layout = dbc.Container(
                                         html.Div(
                                             [
                                                 html.H5("LLM Request"),
-                                                dcc.Input(
+                                                dcc.Textarea(
                                                     id="llm-request-input",
-                                                    type="text",
                                                     placeholder="Enter your request here",
-                                                    style={"width": "80%", "marginRight": "10px"}
+                                                    style={
+                                                        "width": "80%",
+                                                        "marginRight": "10px",
+                                                        "height": "50px",
+                                                        "resize": "vertical",
+                                                        "minHeight": "50px",
+                                                        "maxHeight": "300px",
+                                                        "overflow": "auto",
+                                                    },
                                                 ),
                                                 html.Button(
-                                                    "Submit",
+                                                    "Parse Content",
                                                     id="llm-request-button",
                                                     n_clicks=0,
                                                     className="regular-button",
-                                                    style={"width": "15%"}
+                                                    style={"width": "15%"},
                                                 ),
                                             ],
                                             style={"margin-top": "20px"}
@@ -277,6 +282,8 @@ layout = dbc.Container(
                             id="tabs",
                             active_tab="existing-products",
                         ),
+                        # Hidden Store to Hold Scraped Data
+                        dcc.Store(id='scraped-data', storage_type='memory'),
                     ],
                     width=9,
                 ),
