@@ -104,3 +104,6 @@ def handle_llm_request(n_clicks, llm_request, table_content):
 
 if __name__ == '__main__':
     app.run_server(debug=True, port=8050)
+
+# if __name__ == "__main__":
+#     app.run_server(host="0.0.0.0", port=8050, debug=True)
