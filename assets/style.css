@@ -1,83 +1,595 @@
-.dashboard-container {
-    width: 1400px;
-    height: 800px;
-    margin-left: auto;
-    margin-right: auto;
-    margin-top: 50px;
-    margin-bottom: 50px;
-    border: 1px solid #cccccc;
-    border-radius: 10px;
+body {
+    background: radial-gradient(circle, #E8F0FE, #D1E8FF); 
+    margin: 0;
+    padding-bottom: 0rem;
 }
 
-h1 {
-    font-family: "Arial"; 
-    color: #ffffff; 
-    font-size: 35px;
-    margin: 15px;
+/* Add shadow effect to the content area */
+#content {
+    background-color: #FFFFFF; /* Keep the content area white */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow */
+    border-radius: 15px; /* Rounded corners */
+    padding: 1rem; /* Padding for content */
 }
 
-p {
-    font-family: "Arial";
-    color: #ffffff;
-    font-size: 16px;
-    margin: 15px;
-    text-align: justify;
+body {
+    background-color: #F2F2F2;
+    margin: 0;
+    padding-bottom: 0rem;
 }
 
-/* Radio-buttons */
-
-.form-check {
-    width: 100%;
-    height: 38px;
-    margin: 1px;
-    padding-left: 0;
+hr {
+    color: #9C9C9C;
+    border-width: 2px
 }
 
-.btn.btn-outline-light,
-.btn.btn-light {
-    width: 100%;
-    height: 100%;
-    padding: 6px;
-    font-family: "Arial";
-    border-radius: 3px;
-}
-
-.btn.btn-outline-light {
-    border: 1px solid transparent;
-}
-
-.btn.btn-outline-light:hover {
-    color: #010103;
-    background-color: color-mix(in srgb, var(--bs-light), #010103 7%);
-}
-
-/* Single button */
-
-.btn.btn-info {
-    width: 100%;
-    height: 38px;
-    margin: 1px;
-    padding: 6px;
-    font-family: "Arial";
-    border-radius: 3px;
-    background-color: transparent;
-    border: 1px solid transparent;
-}
-
-.btn.btn-info:active,
-.btn.btn-info:focus {
-    background-color: var(--bs-info);
-}
-
-.btn.btn-info:hover {
-    background-color: color-mix(in srgb, var(--bs-info), #010103 7%);
-}
-
-
-h2 {
-    margin-bottom: 0px;
+h5 {
+    color: #001E78;
     margin-top: 10px;
-    font-family: "Arial";
-    font-size: 14px !important;
+    font-size: 1rem
+}
+
+H4 {
+    color: #001E78;
+    font-size: 1.25rem;
+    font-weight: normal;
+    margin: 0.2rem;
+    margin-right: 0.5rem;
+}
+
+header {
+    padding: 1.5rem 0rem;
+    color: #001E78;
+    /* font-size: xx-large; */
+    font-size: 1.5rem;
+    position: relative;
+    margin-top: 0rem;
+    font-family: arial;
+}
+
+#banner {
+    color: #F2F2F2;
+    position: relative;
+    display: flex;
+    /* background-color: #E4E4E4; */
+    /* border-bottom: 1px solid #FFFFFF; */
+    /* margin-bottom: 1rem; */
+}
+
+#upload-data {
+    width: 100%;
+    height: 3rem;
+    line-height: 3rem;
+    border-width: 1px;
+    border-style: dashed;
+    border-radius: 5px;
+    text-align: center;
+    background-color: #DCDCDC;
+    color: #9C9C9C;
+    font-size: 0.75rem;
+}
+
+#uploaded-file-name-text {
+    display: inline-block;
+    vertical-align: sub;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    color: #001E78;
+    font-size: 0.75rem;
+}
+
+#uploaded-file-name-icon {
+    display: inline-block;
+    vertical-align: sub;
+    color: #001E78;
+}
+
+#sidebar {
+    position: relative;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    /* width: 30rem; */
+    width: 25%;
+    /* margin-left: 1rem; */
+    /* margin-right: 0.5rem; */
+    margin-left: 1%;
+    /* margin-right: 1%; */
+    padding: 0.5rem 1rem;
+    /* padding-bottom: 1rem; */
+    background-color: #FFFFFF;
+    border-radius: 15px;
+    border: 2px;
+    font-family: arial;
+}
+
+#version-info-div {
+    position: relative;
+    top: 3rem;
+    font-size: 12px;
+    padding-bottom: 0.8rem;
+    margin-top: 3rem;
+}
+
+#content {
+    width: 72%;
+    /* margin-left: 0.5rem;
+    margin-right: 1rem; */
+    margin-left: 1%;
+    margin-right: 1%;
+    padding: 1rem 1rem;
+    background-color: #FFFFFF;
+    color: #001E78;
+    border-radius: 15px;
+    border: 2px;
+    font-family: arial;
+}
+
+.date-picker-container {
+    display: flex;
+    align-items: center;
+}
+
+.DateRangePickerInput__withBorder {
+    width: 12rem;
+    border-radius: 15px 0 0 15px;
+    height: 2.35rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    background-color: transparent;
+    /* Set to transparent */
+}
+
+.DateInput {
+    width: auto;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.DateInput_input {
+    font-size: 0.8rem;
+    line-height: 1.25rem;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    color: #333;
+}
+
+.DateRangePickerInput_arrow {
+    width: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #484848;
+}
+
+.DateRangePickerInput_arrow_svg {
+    width: 10px;
+    height: 10px;
+    margin: 0 0.5rem;
+}
+
+[class~="date-picker-range"] {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: auto;
+    height: 2.35rem;
+    border-radius: 15px 0 0 15px;
+    color: #333;
+    background-color: transparent;
+    padding: 0;
+    border-right: none;
+}
+
+[class~="date-range-pick-reset-button"] {
+    background-color: #f0f0f0;
+    border-radius: 0 15px 15px 0;
+    border: 1px solid #ccc;
+    border-left: none;
+    height: 2.35rem;
+    padding: 0 1rem;
+    color: #333;
+    font-size: 12px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+[class~="date-range-pick-reset-button"]:hover {
+    background-color: #C51718;
+    color: #FFFFFF;
+    transition-duration: 0.3s;
+}
+
+[class~="summary-table-div"] {
+    width: 100%;
+    margin: 0px;
+    padding: 5px;
+    display: inline-block;
+    vertical-align: top;
+    overflow-X: "auto";
+}
+
+[class~="summary-label"] {
+    margin-bottom: 5px;
+}
+
+[class~="resulting-list"] {
+    display: inline-block;
+    font-size: 14px;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+[class~="clipboard"] {
+    display: inline-block;
+    vertical-align: top;
+    margin-left: 5px;
+}
+
+[class~="resulting-list-div"] {
+    width: 100%;
+    display: inline-block;
+    margin-left: 0px;
+    padding: 5px;
+}
+
+[class~="traffic-lights"] {
+    background-color: #efefef;
+    border-radius: 15px;
+    padding: 5px;
+    display: flex;
+    width: max-content;
+    float: right;
+    margin-right: 0.5%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Add shadow for 3D effect */
+}
+
+[class~="traffic-light"] {
+    margin: 5px;
+    display: inline-block;
+    vertical-align: bottom;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.5) 20%, rgba(0, 0, 0, 0) 70%), #ffcccc;
+    /* Default color */
+    box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.2), 0 4px 8px rgba(0, 0, 0, 0.2);
+    /* Inner and outer shadow for 3D effect */
+}
+
+[class~="column-mapping"] {
+    background-color: #F2F2F2;
+    width: 150px;
+    color: #001E78;
+    margin-top: 10px;
+    border-radius: 4px;
+}
+
+[class~="text-info"] {
+    position: relative;
+    /* top: 3rem; */
+    font-size: 12px;
+    margin: 0px;
+    padding-bottom: 0rem;
+}
+
+[class~="hover-text"] {
+    color: #00B6ED;
+    font-family: arial;
+}
+
+[class~="field-title"] {
+    font-size: 0.75rem;
+    color: #001E78;
+    margin-bottom: 5px;
+    font-weight: normal;
+}
+
+[class~="dropdown-placeholder"] {
+    background-color: #DCDCDC;
+    width: 100%;
+    margin-bottom: 5px;
+    border-radius: 4px;
+}
+
+[class~="regular-button"] {
+    background-color: #0070B8;
+    /* border: 2px solid #9C9C9C; */
+    border: 1px solid #0070B8;
+    color: #FFFFFF;
+    height: 2.3rem;
+    padding: 0 1rem;
+    position: relative;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s, color 0.3s;
+    /* height: 2rem;
+    line-height: 2rem; */
+}
+
+[class~="regular-button-disabled"] {
+    background-color: #DCDCDC;
+    /* border: 2px solid #9C9C9C; */
+    border: 1px solid #9C9C9C;
+    color: #9C9C9C;
+    height: 32px;
+    position: relative;
+    border-radius: 8px;
+    font-size: 0.75rem;
+    /* height: 2rem;
+    line-height: 2rem; */
+}
+
+[class~="regular-button"]:hover {
+    background-color: #FFFFFF;
+    color: #0070B8;
+    transition-duration: 0.3s;
+}
+
+[class~="tab-title"] {
+    color: #001E78;
+    font-family: arial;
+}
+
+div[class~="check-failed"] {
+    border-radius: 4px;
+    outline: 2px solid red;
+}
+
+.mantine-Tabs-tab[data-active="true"] {
+    background-color: #F2F2F2;
+}
+
+.tooltip-inner {
+    color: #F2F2F2;
+    text-align: center;
+    background-color: #001E78;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f8f9fa;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: block;
+}
+
+.header {
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+}
+
+.text-content {
+    width: 100%;
+}
+
+.header h1 {
+    font-size: 36px;
+    font-weight: bold;
+    background: linear-gradient(to right, #00B6ED, #001E78);
+    -webkit-background-clip: text;
+    color: transparent;
+    position: relative;
+    z-index: 1;
+    overflow: hidden;
+}
+
+.section {
+    margin-bottom: 40px;
+    display: flex;
+    /* Add this to enable flexbox layout */
+    align-items: center;
+    /* Vertically align items in the center */
+    transition: transform 0.5s ease;
+    /* Smooth transition for the transform property */
+}
+
+.section h2 {
+    font-size: 28px;
+    background: linear-gradient(to right, #00B6ED, #001E78);
+    -webkit-background-clip: text;
+    color: transparent;
+    position: relative;
+    /* Ensure the pseudo-element is positioned relative to the h2 */
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+    flex: 1;
+}
+
+.section h2::after {
+    content: '';
+    display: block;
+    width: 100%;
+    height: 2px;
+    /* Height of the border line */
+    background: linear-gradient(to right, #00B6ED, #001E78);
+    /* Same gradient as the text */
+    position: absolute;
+    bottom: 0;
+    /* Position it at the bottom of the h2 */
+    left: 0;
+}
+
+.section p,
+.section ul {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #001E78;
+    flex: 1;
+}
+
+.section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+}
+
+.section:hover {
+    transform: scale(1.2);
+    /* Enlarge the section slightly on hover */
+    z-index: 1;
+    /* Ensure the enlarged section is above other elements */
+}
+
+.right-image {
+    margin-left: 20px;
+    /* Add some space between the text and the image */
+}
+
+.right-image img {
+    width: 100%;
+    /* Set the width of the image */
+    height: auto;
+    border-radius: 5%;
+    /* Maintain the aspect ratio */
+}
+
+.right-image-two {
+    margin-left: 20px;
+    /* Add some space between the text and the image */
+}
+
+.right-image-two img {
+    width: 240px;
+    /* Set the width of the image */
+    height: auto;
+    border-radius: 5%;
+    /* Maintain the aspect ratio */
+}
+
+.left-image {
+    margin-right: 20px;
+    /* Add some space between the image and the text */
+}
+
+.left-image img {
+    width: 100%;
+    /* Set the width of the image */
+    height: auto;
+    border-radius: 5%;
+    /* Maintain the aspect ratio */
+}
+
+.left-image-two {
+    margin-right: 20px;
+    /* Add some space between the image and the text */
+}
+
+.left-image-two img {
+    width: 300px;
+    /* Set the width of the image */
+    height: auto;
+    border-radius: 5%;
+    /* Maintain the aspect ratio */
+}
+
+.footer {
+    text-align: center;
+    padding: 20px 0;
+    color: #001E78;
+}
+
+.site-of-the-day {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 10px;
+    border-radius: 5px;
+    margin: 5px auto;
+    max-width: 300px;
+}
+
+.site-of-the-day .label {
+    font-size: 18px;
+    font-weight: bold;
+    color: #001E78;
+    margin-right: 10px;
+}
+
+.site-of-the-day .date {
+    font-size: 18px;
     color: #ffffff;
+    background-color: #ffffff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    /* Increase the border-radius to make it more rounded */
+    position: relative;
+    /* Ensure the pseudo-element is positioned relative to the .date */
+    z-index: 0;
+    /* Ensure the content is above the pseudo-element */
+    box-shadow: 0 0 0 2px transparent;
+    /* Create space for the gradient border */
+}
+
+.site-of-the-day .date::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border-radius: 15px;
+    /* Match the border-radius of the .date */
+    background: linear-gradient(to right, #00B6ED, #001E78);
+    /* Gradient border */
+    z-index: -1;
+    /* Ensure the pseudo-element is behind the content */
+}
+
+.date-picker-single-container {
+    display: flex;
+    align-items: center;
+}
+
+.SingleDatePickerInput__withBorder {
+    width: 12rem;
+    border-radius: 15px;
+    height: 2.35rem;
+    display: flex;
+    align-items: center;
+    border: 1px solid #ccc;
+    background-color: transparent;
+}
+
+.SingleDatePicker {
+    width: auto;
+    border-radius: 0;
+    border: none;
+    background-color: transparent;
+}
+
+.SingleDatePickerInput {
+    font-size: 0.8rem;
+    line-height: 1.25rem;
+    text-align: center;
+    border: none;
+    background-color: transparent;
+    color: #333;
+}
+
+.SingleDatePickerInput_arrow {
+    width: 10px;
+    display: inline-block;
+    vertical-align: middle;
+    color: #484848;
+}
+
+.SingleDatePickerInput_arrow_svg {
+    width: 10px;
+    height: 10px;
+    margin: 0 0.5rem;
 }
