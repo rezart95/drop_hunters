@@ -1,7 +1,7 @@
 from dash import html, Input, Output, State
 import openai
 import os
-from app import app
+from dash_app import app
 
 # Load environment variables
 from dotenv import load_dotenv
