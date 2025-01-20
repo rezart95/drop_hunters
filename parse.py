@@ -1,3 +1,16 @@
+"""
+parse.py
+
+This module handles the natural language processing of invoice data using LangChain and OpenAI.
+It provides functionality to:
+- Process user queries against scraped invoice data
+- Extract specific information from invoice content
+- Return structured responses through a Dash callback
+
+The module uses a template-based approach to ensure consistent and focused information extraction
+from invoice data, following strict guidelines to return only relevant information.
+"""
+
 from dash import html, Input, Output, State
 import openai
 import os
@@ -16,19 +29,30 @@ load_dotenv()
 llm = ChatOpenAI(
     openai_api_key=os.environ.get('OPEN_API_KEY'),
     model_name="gpt-4o",
-    temperature=0.7
+    temperature=0.7  # Lower temperature for more focused, deterministic responses
 )
 
-# Initialize chat history
+# Initialize chat history for potential future use
 chat_history = []
 
 @app.callback(
     Output("llm-response", "children"),
     Input("llm-request-button", "n_clicks"),
-    State("llm-request-input", "value"),
     Input("scraped-data", "data"),
+    State("llm-request-input", "value"),
 )
-def handle_llm_request(n_clicks, user_input, scraped_data):
+def handle_llm_request(n_clicks, scraped_data, user_input):
+    """
+    Process user queries against scraped data and return relevant information.
+    
+    Args:
+        n_clicks (int): Number of times the request button has been clicked
+        scraped_data (Union[str, list]): The scraped data to process
+        user_input (str): The user's query or information request
+    
+    Returns:
+        dash.html.Div: A formatted HTML div containing the query response or error message
+    """
     if n_clicks > 0 and user_input:
         print("LLM Request triggered")
 
@@ -36,7 +60,7 @@ def handle_llm_request(n_clicks, user_input, scraped_data):
             print("No scraped data available.")
             return html.Div("No scraped data available to process your request.")
         
-        # If scraped_data is a list (split content), join it
+        # Process scraped data into a consistent format
         if isinstance(scraped_data, list):
             processed_scraped_data = "\n\n".join(scraped_data)
         else:
@@ -44,14 +68,13 @@ def handle_llm_request(n_clicks, user_input, scraped_data):
         
         print(f"Processed Scraped Data Length: {len(processed_scraped_data)} characters")
 
-        # Check if there's valid extracted data to proceed
+        # Validate processed data
         if not processed_scraped_data:
             return html.Div("No valid data found to process.", style={'color': 'red'})
 
         try:
-            # Use Langchain to process the query
+            # Define the extraction prompt template with specific instructions
             prompt_template = """
-            
             You are tasked with extracting specific information from the following text content: {processed_scraped_data}
             Please follow these instructions carefully:
             1. **Extract Information:** Only extract the information that directly matches this user query: {user_input}
@@ -60,6 +83,7 @@ def handle_llm_request(n_clicks, user_input, scraped_data):
             4. **Direct Data Only:** Your output should contain only the data that is explicitly requested, with no other text
             """
 
+            # Create and execute the LangChain processing pipeline
             prompt = PromptTemplate(
                 input_variables=["processed_scraped_data", "user_input"],
                 template=prompt_template
@@ -70,7 +94,7 @@ def handle_llm_request(n_clicks, user_input, scraped_data):
                 "user_input": user_input
             })
 
-            # Display the response in a chat-like format
+            # Format and return the response
             return html.Div(
                 [
                     html.Div(f"You: {user_input}", style={'font-weight': 'bold'}),
