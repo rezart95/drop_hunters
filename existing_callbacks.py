@@ -9,45 +9,41 @@ from app import app
     State("group-store-input", "value"),
 )
 def update_table(n_clicks, url):
-    print("Callback triggered")
-    print(f"n_clicks: {n_clicks}, url: {url}")
-    
+    """
+    Callback function to handle website scraping and data processing when the user clicks
+    the select product button.
+
+    Args:
+        n_clicks (int): Number of times the button has been clicked. None if never clicked.
+        url (str): The URL input by the user to scrape.
+
+    Returns:
+        tuple: Contains two elements:
+            - html.Div: The visual representation of the scraped data
+            - Union[str, List[str], None]: The processed data to store, or None if scraping failed
+    """
     if n_clicks is None or n_clicks == 0:
-        print("Button has not been clicked yet.")
         return (
             html.Div("Please enter a URL and click the button to see the scraped data."),
             None
         )
     
     if not url:
-        print("URL is empty.")
         return (
             html.Div("Please enter a URL and click the button to see the scraped data."),
             None
         )
     
-    print(f"Scraping website: {url}")
+    # Attempt to scrape the website
     html_content = scrape_website(url)
-    print("Scraping completed.")
     
     if html_content:
-        print("HTML content retrieved successfully.")
-        
-        # Extract body content
+        # Extract and process the content
         body_content = extract_body_content(html_content)
-        print("Body content extracted.")
-        
-        # Clean the body content
         cleaned_content = clean_body_content(body_content)
-        print("Body content cleaned.")
-        
-        # Optionally, split the content if it's too long
         split_contents = split_dom_content(cleaned_content)
-        print(f"Content split into {len(split_contents)} parts.")
         
-        # Store the processed data
-        # If you split the content, you might want to store it as a list
-        # Otherwise, store cleaned_content directly
+        # Store the processed data - as a list if split, otherwise as single content
         processed_data = split_contents if len(split_contents) > 1 else cleaned_content
         
         return (
@@ -58,7 +54,6 @@ def update_table(n_clicks, url):
             processed_data
         )
     else:
-        print("No content returned from scrape_website.")
         return (
             html.Div("Failed to retrieve data from the provided URL."),
             None
