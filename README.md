@@ -1,3 +1,5 @@
+![Drop Hunters](media/drophunter_image.png)
+
 ## Drop Hunters
 
 Drop Hunters is a web scraping and automation tool designed to help users track and purchase products from various e-commerce websites. The application scrapes product data, processes it, and provides a user-friendly interface for interacting with the scraped data. Additionally, it includes automation features for purchasing products.
