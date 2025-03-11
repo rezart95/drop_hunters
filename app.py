@@ -7,10 +7,14 @@ from parse import handle_llm_request
 app.layout = layout.layout
 
 @app.callback(
-    [Output("table-visualization", "children"),
-     Output("scraped-data", "data")],  # Add output for the store
-    Input("select-product-button", "n_clicks"),
-    Input("group-store-input", "value"),
+    [
+        Output("table-visualization", "children"),
+        Output("scraped-data", "data")
+    ],
+    [
+        Input("select-product-button", "n_clicks"),
+        Input("group-store-input", "value"),
+    ]
 )
 def update_table(n_clicks, url):
     """
